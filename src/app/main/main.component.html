@@ -28,7 +28,13 @@
   </div>
 </nav>
 <div>Time: {{game.time}}</div>
-<div class="content">
+<div *ngFor="let cell of game.getCells()">
+  <div (click)="game.onClickCell(cell)" >
+      {{ cell.canClick()}}
+  </div>
+</div>
+
+<!-- <div class="content">
   <table class="table">
     <tr *ngFor="let column of draw.column; let c = index">
       <td *ngFor="let row of draw.row; let r = index" style="border: 1px solid black;" (click)="clickCell(c, r)"> 
@@ -36,4 +42,5 @@
       </td>
     </tr>
   </table>
-</div>
+</div> -->
+ 

@@ -9,7 +9,7 @@ interface ICell {
 
 export class Cell implements ICell {
     type;
-    visible;
+    isClicked;
     row;
     column;
     haveBomb;
@@ -17,13 +17,15 @@ export class Cell implements ICell {
     constructor(row: number, column: number) {
         this.row = row;
         this.column = column;
+        this.isClicked = false;
     }
     
     ngOnInit(): void {
-    
+        
     }
 
-    getSurroundingCell(): any { 
+
+    public getSurroundingCell(): any { 
         var surroundingCell: any = [
             [this.row-1, this.column-1],
             [this.row, this.column-1],
@@ -38,7 +40,17 @@ export class Cell implements ICell {
         return surroundingCell;
      }
 
-    isVisible(): boolean { return true; }
+    public getKey(): string{
+        return this.column+'_'+this.row;
+    }
+
+    public canClick(): boolean { 
+        return !this.isClicked; 
+    }
+
+    public onClick(): void {
+        this.isClicked = true;
+    }
 
     isFlagged(): boolean { return true; }
 

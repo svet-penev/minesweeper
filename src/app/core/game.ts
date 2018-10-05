@@ -3,7 +3,7 @@ import { Cell } from "./cell";
 
 interface IGame {
     time: number,
-    cells: [],
+    cells: any,
     board: Board,
     isFinished() :boolean;
 }
@@ -27,5 +27,13 @@ export class Game implements IGame {
                 this.cells.push(cell);
             }
         }
+    }
+
+    public getCells(): any {
+        return this.cells;
+    }
+
+    public onClickCell(cell: Cell) {
+        cell.onClick();
     }
 }
