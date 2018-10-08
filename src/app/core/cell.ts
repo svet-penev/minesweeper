@@ -1,4 +1,4 @@
-interface ICell {
+export interface ICell {
     type: string,
     visible: boolean,
     haveBomb: boolean,
@@ -13,11 +13,13 @@ export class Cell implements ICell {
     row;
     column;
     haveBomb;
+    visible;
 
     constructor(row: number, column: number) {
         this.row = row;
         this.column = column;
         this.isClicked = false;
+        this.haveBomb = false;
     }
     
     ngOnInit(): void {
@@ -54,6 +56,12 @@ export class Cell implements ICell {
 
     isFlagged(): boolean { return true; }
 
-    hasBomb(): boolean { return true; }
+    hasBomb(): boolean { 
+        return this.haveBomb; 
+    }
+
+    setBomb(bool: boolean): void {
+        this.haveBomb = bool;
+    }
 
 }
