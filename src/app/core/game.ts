@@ -48,6 +48,31 @@ export class Game implements IGame {
         return this.cells;
     }
 
+    public getCellsForColumn(column: number): any {
+        var cells: Cell[] =  [];
+        for ( var i=0; i<this.getCells().length; i++ ) {
+            var cell: Cell = this.cells[i];
+            if(cell.column === column) {
+                cells.push(cell);
+            }
+        }
+       
+        return cells;
+    }
+
+    public getNumberOfSurrondedBoom(cell: Cell): number{
+        var number: number = 0;
+        var surrondingCells = cell.getSurroundingCell();
+        for ( var i=0; i<surrondingCells.length; i++ ) {
+            var cell: Cell = this.findCell(surrondingCells[i][0], surrondingCells[i][1]);
+           if(cell && cell.hasBomb()){
+            number++;
+           }
+        }
+
+        return number;
+    }
+
     public onClickCell(cell: Cell): void {
         cell.onClick();
 
@@ -56,11 +81,24 @@ export class Game implements IGame {
         }
     }
 
-    public finishGame()
-    {
+    public finishGame() {
         for(var i=0; i<this.getCells().length; i++) {
             this.cells[i].onClick();
         }
+    }
+
+    public getArrayOfNumbers(number: Number): number[]  {
+        return Array(number).fill().map((x,i)=>i)
+    }
+
+    public findCell(column: number, row: number): any {
+        var cell: Cell = false;
+        for(var i=0; i<this.getCells().length; i++) {
+            if(this.cells[i].column === column && this.cells[i].row === row)
+            cell = this.cells[i]
+        }
+
+        return cell;
     }
 
     protected buildIndexNumberForBombs(): number[] {

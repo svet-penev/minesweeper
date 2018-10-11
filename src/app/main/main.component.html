@@ -15,10 +15,16 @@
   </div>
 </nav>
 <div>Time: {{game.time}}</div>
-<div *ngFor="let cell of game.getCells()">
-  <div (click)="game.onClickCell(cell)" >
-      {{ cell.canClick() }}
-      <span *ngIf="!cell.canClick() && cell.hasBomb()">Boom</span>
-  </div>
-</div>
+<table class="table">
+  <tr *ngFor="let column of game.getArrayOfNumbers(board.column)">
+    <td *ngFor="let cell of game.getCellsForColumn(column)">
+        <div (click)="game.onClickCell(cell)" >
+            <span *ngIf="cell.canClick()">+</span>
+            <span *ngIf="!cell.canClick() && !cell.hasBomb()">{{ game.getNumberOfSurrondedBoom(cell) }}</span>
+            <span *ngIf="!cell.canClick() && cell.hasBomb()">Boom</span>
+        </div>
+    </td>
+  </tr>
+</table>
+
  

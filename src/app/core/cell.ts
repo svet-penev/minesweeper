@@ -27,16 +27,16 @@ export class Cell implements ICell {
     }
 
 
-    public getSurroundingCell(): any { 
+    public getSurroundingCell(): any {    
         var surroundingCell: any = [
-            [this.row-1, this.column-1],
-            [this.row, this.column-1],
-            [this.row+1, this.column-1],
-            [this.row-1, this.column],
-            [this.row+1, this.column],
-            [this.row-1, this.column+1],
-            [this.row, this.column+1],
-            [this.row+1, this.column+1],
+            [this.column-1, this.row-1],
+            [this.column, this.row-1],
+            [this.column+1, this.row-1],
+            [this.column-1, this.row],
+            [this.column+1, this.row],
+            [this.column-1, this.row+1],
+            [this.column, this.row+1],
+            [this.column+1, this.row+1],
         ];
 
         return surroundingCell;
@@ -63,5 +63,4 @@ export class Cell implements ICell {
     setBomb(bool: boolean): void {
         this.haveBomb = bool;
     }
-
 }
